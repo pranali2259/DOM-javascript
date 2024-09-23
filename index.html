@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         let products = [];
+
+ function LoadProduct() {
+
+     const tbody = document.querySelector("tbody");
+     tbody.innerHTML = '';
+
+
+     for (const item of products) {
+         const tr = document.createElement("tr");
+         const tdname = document.createElement("td");
+         const tdprice = document.createElement("td");
+         tdname.innerHTML = item.Name;
+         tdprice.innerHTML = item.price;  
+         tr.appendChild(tdname);
+         tr.appendChild(tdprice);
+         tbody.appendChild(tr);
+     }
+ }
+
+ function AddClick() {
+     const product = {
+         Name: document.getElementById("txtName").value,
+         price: document.getElementById("txtPrice").value
+     };
+     if (product.Name && !isNaN(product.price) && product.price !== "") {
+         products.push(product);
+         alert("Product added");
+         LoadProduct();
+
+         document.getElementById("txtName").value = "";
+         document.getElementById("txtPrice").value = "";
+     } else {
+         alert("Please enter valid product details.");
+     }
+ }
+    </script>
+</head>
+<body>
+    <h2>Add New Product</h2>
+    <dl>
+        <dt>Name</dt>
+        <dd><input type="text" id="txtName"></dd>
+        <dt>Price</dt>
+        <dd><input type="text" id="txtPrice"></dd>
+    </dl>
+    <button onclick="AddClick()">Add product</button>
+    <hr>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+    </table>
+</body>
+</html>
